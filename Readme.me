@@ -1,0 +1,5 @@
+pnpm run dev
+npx prisma studio
+npx prisma migrate dev --name init
+
+psql -U postgres -h localhost -d postgres
