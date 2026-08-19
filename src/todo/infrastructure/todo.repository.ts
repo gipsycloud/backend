@@ -26,13 +26,12 @@ export class TodoRepository implements ITodoRepository {
         })
     }
 
-    async updateTodo(id: number, dto: { title: string }): Promise<Todo> {
+    async updateTodo(id: number, dto: { title?: string; completed?: boolean }): Promise<Todo> {
         const result = await this.prisma.todo.update({
-            where: {
-                id: id,
-            },
+            where: { id },
             data: {
                 title: dto.title,
+                completed: dto.completed,
             }
         })
         return result

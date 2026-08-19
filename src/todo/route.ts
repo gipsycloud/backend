@@ -1,9 +1,9 @@
 import express from "express";
 import { prisma } from "../database/prisma";
 import { validation } from "../middleware/validationMiddleware";
-import { todoCreateSchema } from "../validation/todo,create";
+import { todoCreateSchema, todoUpdateSchema } from "../validation/todo,create";
 import { TodoController } from "./controller/todo.controller";
-import { TodoRepository } from "./infrastructure/todo.repostory";
+import { TodoRepository } from "./infrastructure/todo.repository";
 import { TodoService } from "./useCase/todo.service";
 
 const todoRepo = new TodoRepository(prisma);
@@ -15,7 +15,7 @@ const todoRouter = express.Router();
 todoRouter.post("/create", validation(todoCreateSchema), todoController.createTodo )
 todoRouter.get("/", todoController.getAllTodos)
 todoRouter.get("/:id", todoController.getTodoById)
-todoRouter.put("/:id", validation(todoCreateSchema), todoController.updateTodo)
+todoRouter.put("/:id", validation(todoUpdateSchema), todoController.updateTodo)
 todoRouter.delete("/:id", todoController.deleteTodo)
 
 export default todoRouter;

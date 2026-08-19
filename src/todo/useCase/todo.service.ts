@@ -28,11 +28,8 @@ export class TodoService {
         return todo;
     }
 
-    async updateTodo(id: number, dto: { title: string }): Promise<Todo> {
+    async updateTodo(id: number, dto: { title?: string; completed?: boolean }): Promise<Todo> {
         const todo = await this.repo.updateTodo(id, dto);
-        if (!todo) {
-            throw new Error(`Failed to update todo with id ${id}`);
-        }
         return todo;
     }
 
